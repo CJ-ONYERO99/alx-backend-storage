@@ -3,12 +3,6 @@
 5. Implementing an expiring web cache and tracker
 """
 
-
-#!/usr/bin/env python3
-"""
-5. Implementing an expiring web cache and tracker
-"""
-
 import redis
 from typing import Callable
 from functools import wraps
