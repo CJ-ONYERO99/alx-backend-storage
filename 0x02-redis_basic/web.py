@@ -9,7 +9,6 @@ from functools import wraps
 import requests
 
 def request_count(func: Callable) -> Callable:
-    '''Request count for a requested url'''
     @wraps(func)
     def wrapper(*args, **kwargs):
         redis_client = redis.Redis()
@@ -26,14 +25,14 @@ def request_count(func: Callable) -> Callable:
         
         # If not cached, call the function and cache the result
         result = func(*args, **kwargs)
-        redis_client.setex(cache_key, 10, result)
+        redis_client.setex(cache_key, 10, result)  # Set cache with expiration
         return result
     return wrapper
 
 
 @request_count
 def get_page(url: str) -> str:
-    '''Uses the requests module to obtain the HTML content of a particular URL and returns it'''
+    """Uses the requests module to obtain the HTML content of a particular URL and returns it"""
     response = requests.get(url)
     return response.text
 
